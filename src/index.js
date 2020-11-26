@@ -1,14 +1,14 @@
 // Npm packages //
 const express = require('express');
-const http = require('http');
-const io = require('socket.io');
+const app = express(); // Express App Server //
+const http = require('http').createServer(app); // Created Http Server //
+const webSocket = require('socket.io');
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 
 // App , Http and Port //
-const app = express();
-http.createServer(app);
+const io = webSocket(http);
 const port = process.env.PORT || 8080 ; // if Web App Is Hoated it will Run in Given Domain Name , else on Poet 8080 //
 
 // File Path Decleration Area //
