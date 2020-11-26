@@ -35,6 +35,15 @@ app.get('*' , (req , res) => {
 });
 
 // Web Socket (socket.io) Connection/EventsEvents //
-io.on('connection' , () => {
-    console.log( );
+io.on('connection' , (socket) => {
+    console.log( chalk.red.bgBlue.bold(`User Connected`));
+});
+
+// listining on Port 8080 //
+http.listen( port , (err) => {
+    if (err) {
+        console.log( chalk.blue.bgRed.bold(`Error Found :: ${err}`));
+    } else {
+        console.log( chalk.red.bgBlue.bold(`http://127.0.0.1:${port}`));
+    }
 });
