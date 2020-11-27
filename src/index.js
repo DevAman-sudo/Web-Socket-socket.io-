@@ -36,7 +36,12 @@ app.get('*' , (req , res) => {
 
 // Web Socket (socket.io) Connection/EventsEvents //
 io.on('connection' , (socket) => {
-    console.log( chalk.red.bgBlue.bold(`User Connected`));
+    // console.log( chalk.red.bgBlue.bold(`User Connected`));
+    
+    // socket connection on button click //
+    socket.on('btnClick' , () => {
+        console.log( chalk.red.bgBlue.bold(`User Connected`));
+    });
 });
 
 // listining on Port 8080 //

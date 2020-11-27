@@ -1,0 +1,48 @@
+/* star universal selector */
+* ,
+*::before ,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* css root selector */
+:root {
+    --soft-white: #f1f1f1;
+}
+
+/* body and html */
+html { font-size: 62.5%; }
+body {
+    width: 100%;
+    height: auto;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--soft-white);
+}
+
+/* Class Button */
+.button {
+    width: 24rem;
+    height: 6rem;
+    border: none;
+    border-radius: 1.7rem;
+    margin: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+    word-spacing: 0.4rem;
+    letter-spacing: 0.2rem;
+    list-style: none;
+    transition: 0.5s linear ease;
+}
+.button:focus {
+    outline: 0;
+}
+.button:active {
+    background: #000;
+    color: #fff;
+}
