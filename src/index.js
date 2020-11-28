@@ -40,6 +40,10 @@ io.on('connection' , (socket) => {
     socket.on('btnClick' , () => {
         console.log( chalk.red.bgBlue.bold(`User Connected and his Socket ID is ${socket.id}`));
     });
+    // Reciving Data From Client Side //
+    socket.on('hello' , data => {
+        console.log( chalk.red.bgBlue.bold(`${data}`));
+    });
 });
 
 // listining on Port 8080 //
