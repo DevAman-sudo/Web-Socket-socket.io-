@@ -39,12 +39,12 @@ io.on('connection' , (socket) => {
     
     // socket connection on button click //
     socket.on('btnClick' , () => {
-        console.log( chalk.red.bgBlue.bold(`User Connected and his Socket ID is ${socket.id}`));
+        console.log( chalk.red.bgBlue.bold(`User Connected`));
     });
     
     // Reciving Data From Client Side //
-    socket.on('hello' , (data) => {
-        console.log( chalk.red.bgBlue(`${data}`));
+    socket.on('online' , (data) => {
+        console.log( chalk.red.bgBlue(`${data} and his Socket Id is ${socket.id}`));
     });
 });
 
