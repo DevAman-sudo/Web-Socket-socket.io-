@@ -44,7 +44,7 @@ io.on('connection' , (socket) => {
     
     // Reciving Data From Client Side //
     socket.on('hello' , (data) => {
-        console.log( chalk.red.bgBlue.bold(`${data}`));
+        console.log( chalk.red.bgBlue(`${data}`));
     });
 });
 

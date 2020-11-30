@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width initial-scale=1.0">
-        <!-- local css file path -->
-        <link rel="stylesheet" href="/Css/style.css" />
-        <!-- page title and favicon -->
-        <title>Web Socket Connection</title>
-    </head>
-    <body>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <!-- local css file path -->
+    <link rel="stylesheet" href="/Css/style.css" />
+    <!-- page title and favicon -->
+    <title>Web Socket Connection</title>
+</head>
+<body>
+    <!-- Form To Send Data To Server Through WebSocket(socket.io) -->
+    <form action="" class="form" id="form" method="get" accept-charset="utf-8">
+        <input type="text" name="text" class="input" id="text" placeholder="Text Area" autocomplete="off" />
         <button type="submit" class="button" id="button">Click</button>
-        
-        <!-- Web Socket (socket.io) liabriary JavaScript CDN link -->
-        <script src="socket.io/socket.io.js"></script>
-        <!-- local JavaScript File Path -->
-        <script src="/Js/main.js" type="text/javascript" charset="utf-8"></script>
-    </body>
+    </form>
+
+    <!-- Data Container For Socket Form -->
+    <div class="data-container"></div>
+    
+    <!-- Web Socket (socket.io) liabriary JavaScript CDN link -->
+    <script src="socket.io/socket.io.js"></script>
+    <!-- local JavaScript File Path -->
+    <script src="/Js/main.js" type="text/javascript" charset="utf-8"></script>
+</body>
 </html>
