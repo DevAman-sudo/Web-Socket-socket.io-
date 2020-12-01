@@ -8,11 +8,20 @@ const socket = io();
 
 // Prompt That Takes User Name //
 const Name = prompt(`Enter Your Name:: `);
+
+// Append Data Function //
+const appendData = (data) => {
+    const messageElement = document.createElement('h2');
+    messageElement.innerText = data ;
+    dataContainer.appendChild(messageElement);
+};
+
 // Socket Event For User Name //
-socket.on('new-user-joined' , (Name) => {
-    socket.id = Name ;
+socket.emit('new-user-joined' , Name);
+// socket User Joined Event For Sending Name To Data Container //
+socket.on('user-joined' , (Name) => {
+    appendData(`${Name} Joined.`);
 });
-    socket.emit('user-joined' , Name);
 
 // Sending Data To Server //
 socket.emit('online' , "User Online");

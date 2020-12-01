@@ -36,6 +36,8 @@ app.get('*', (req, res) => {
 });
 
 // Web Socket (socket.io) Connection/EventsEvents //
+users = {}; // Users Container //
+
 io.on('connection', (socket) => {
 
     // socket connection on button click //
@@ -51,9 +53,10 @@ io.on('connection', (socket) => {
         });
 
     // Reciving User Name From Client //
-    socket.on('user-joined',
+    socket.on('new-user-joined',
         (Name) => {
-            console.log(`new user ${Name}`);
+            users[socket.id] = Name;
+            socket.broadcast.emit('user-joined' , Name);
         });
 
     // Reciving Message From Client //
@@ -61,6 +64,7 @@ io.on('connection', (socket) => {
         (message) => {
             socket.broadcast.emit('chatMessage', message);
         });
+    // -- //
 });
 
 // listining on Port 8080 //
