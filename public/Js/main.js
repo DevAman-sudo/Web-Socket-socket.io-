@@ -1,4 +1,5 @@
 // DOM elements //
+const form = document.getElementById('form');
 const textArea = document.getElementById('text');
 const button = document.getElementById('button');
 const dataContainer = document.getElementById('data-container');
@@ -10,11 +11,22 @@ const socket = io();
 const Name = prompt(`Enter Your Name:: `);
 
 // Append Data Function //
-const appendData = (data) => {
+function appendData(data) {
     const messageElement = document.createElement('h2');
     messageElement.innerText = data ;
     dataContainer.appendChild(messageElement);
-};
+}
+
+// Listining Submit event on button Click //
+form.addEventListener('submit' , (e) => {
+    e.preventDefault(); // preventing page to submit //
+    
+    // append message on data container //
+    const message = textArea.value ;
+    appendData(`You:: ${message}`);
+    socket.emit('send' , message); // send message to Server //
+    textArea.value = "" ;
+});
 
 // Socket Event For User Name //
 socket.emit('new-user-joined' , Name);
@@ -23,23 +35,9 @@ socket.on('user-joined' , (Name) => {
     appendData(`${Name} Joined.`);
 });
 
+socket.on('receive' , (data) => {
+    appendData(`${data.message}: ${data.name}`);
+});
+
 // Sending Data To Server //
 socket.emit('online' , "User Online");
-
-// Clicked Function //
-function clicked() {
-    // Sending Value Of TextArea To Data Container //
-    const h2 = document.createElement('h2'); 
-    const message = textArea.value ;
-    // Sending message To Server //
-    socket.emit('sendMessage' , message);
-    h2.innerText = message ;
-    dataContainer.appendChild(h2);
-    textArea.value = "" ;
-    
-    // socket event emitter on client side on click //
-    socket.emit('btnClick');
-}
-
-// Button Click Event //
-button.addEventListener('click' , clicked); // Calling Clicked Function On Button Click //

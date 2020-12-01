@@ -60,9 +60,9 @@ io.on('connection', (socket) => {
         });
 
     // Reciving Message From Client //
-    socket.on('sendMessage',
+    socket.on('send',
         (message) => {
-            socket.broadcast.emit('chatMessage', message);
+            socket.broadcast.emit('receive', {message: message , name: users[socket.id] });
         });
     // -- //
 });
