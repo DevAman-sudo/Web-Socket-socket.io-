@@ -6,6 +6,14 @@ const dataContainer = document.getElementById('data-container');
 // Socket Connection (client) //
 const socket = io();
 
+// Prompt That Takes User Name //
+const Name = prompt(`Enter Your Name:: `);
+// Socket Event For User Name //
+socket.on('new-user-joined' , (Name) => {
+    socket.id = Name ;
+});
+    socket.emit('user-joined' , Name);
+
 // Sending Data To Server //
 socket.emit('online' , "User Online");
 
@@ -13,7 +21,10 @@ socket.emit('online' , "User Online");
 function clicked() {
     // Sending Value Of TextArea To Data Container //
     const h2 = document.createElement('h2'); 
-    h2.innerText = textArea.value ;
+    const message = textArea.value ;
+    // Sending message To Server //
+    socket.emit('sendMessage' , message);
+    h2.innerText = message ;
     dataContainer.appendChild(h2);
     textArea.value = "" ;
     

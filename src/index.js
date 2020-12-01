@@ -9,20 +9,21 @@ const path = require('path');
 
 // App , Http and Port //
 const io = webSocket(http);
-const port = process.env.PORT || 8080 ; // if Web App Is Hoated it will Run in Given Domain Name , else on Poet 8080 //
+const port = process.env.PORT || 8080; // if Web App Is Hoated it will Run in Given Domain Name , else on Poet 8080 //
 
 // File Path Decleration Area //
-const staticPath = path.join( __dirname , '../public'); // All Static Web Pages stored in Public Folder //
-const indexPagePath = path.join( staticPath , '/index.html');
+const staticPath = path.join(__dirname, '../public'); // All Static Web Pages stored in Public Folder //
+const indexPagePath = path.join(staticPath, '/index.html');
 
 // Serving Public Folder Static Pages //
 app.use(express.static(staticPath));
 
 // Page Routing Area //
-app.get('/' , (req , res) => { // Serving Deafult Page (index.html) //
-    fs.readFileSync( indexPagePath , 'utf-8' , (err , data) => {
+app.get('/', (req, res) => {
+    // Serving Deafult Page (index.html) //
+    fs.readFileSync(indexPagePath, 'utf-8', (err, data) => {
         if (err) {
-            console.log( chalk.blue.bgRed.bold(`Error Found (index page routing) :: ${err}`));
+            console.log(chalk.blue.bgRed.bold(`Error Found (index page routing) :: ${err}`));
         } else {
             res.send(`${data}`);
         }
@@ -30,29 +31,43 @@ app.get('/' , (req , res) => { // Serving Deafult Page (index.html) //
 });
 
 // Serving 404 Error Page (404.html) //
-app.get('*' , (req , res) => {
+app.get('*', (req, res) => {
     res.send(`404 Error Found`);
 });
 
 // Web Socket (socket.io) Connection/EventsEvents //
-io.on('connection' , (socket) => {
-    
+io.on('connection', (socket) => {
+
     // socket connection on button click //
-    socket.on('btnClick' , () => {
-        console.log( chalk.red.bgBlue.bold(`User Connected`));
-    });
-    
+    socket.on('btnClick',
+        () => {
+            console.log(chalk.red.bgBlue.bold(`User Connected`));
+        });
+
     // Reciving Data From Client Side //
-    socket.on('online' , (data) => {
-        console.log( chalk.red.bgBlue(`${data} and his Socket Id is ${socket.id}`));
-    });
+    socket.on('online',
+        (data) => {
+            console.log(chalk.red.bgBlue(`${data} and his Socket Id is ${socket.id}`));
+        });
+
+    // Reciving User Name From Client //
+    socket.on('user-joined',
+        (Name) => {
+            console.log(`new user ${Name}`);
+        });
+
+    // Reciving Message From Client //
+    socket.on('sendMessage',
+        (message) => {
+            socket.broadcast.emit('chatMessage', message);
+        });
 });
 
 // listining on Port 8080 //
-http.listen( port , (err) => {
+http.listen(port, (err) => {
     if (err) {
-        console.log( chalk.blue.bgRed.bold(`Error Found :: ${err}`));
+        console.log(chalk.blue.bgRed.bold(`Error Found :: ${err}`));
     } else {
-        console.log( chalk.red.bgBlue.bold(`http://127.0.0.1:${port}`));
+        console.log(chalk.red.bgBlue.bold(`http://127.0.0.1:${port}`));
     }
 });
