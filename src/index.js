@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
     // Reciving Message From Client //
     socket.on('send',
         (message) => {
-            socket.broadcast.emit('receive', {message: message , name: users[socket.id] });
+            socket.broadcast.emit('receive', {name: users[socket.id] , message: message});
         });
     // -- //
 });

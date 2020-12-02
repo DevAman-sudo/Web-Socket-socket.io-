@@ -36,7 +36,7 @@ socket.on('user-joined' , (Name) => {
 });
 
 socket.on('receive' , (data) => {
-    appendData(`${data.message}: ${data.name}`);
+    appendData(`${data.name}: ${data.message}`);
 });
 
 // Sending Data To Server //
