@@ -12,7 +12,8 @@ const Name = prompt(`Enter Your Name:: `);
 
 // Append Data Function //
 function appendData(data) {
-    const messageElement = document.createElement('h2');
+    const messageElement = document.createElement('sn');
+    messageElement.classList.add('content');
     messageElement.innerText = data ;
     dataContainer.appendChild(messageElement);
 }
