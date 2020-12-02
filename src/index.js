@@ -55,16 +55,22 @@ io.on('connection', (socket) => {
     // Reciving User Name From Client //
     socket.on('new-user-joined',
         (Name) => {
-            users[socket.id] = Name;
+            users[socket.id] = Name; // Storing Users Socket ID as Name in Users Object //
             socket.broadcast.emit('user-joined' , Name);
         });
 
     // Reciving Message From Client //
     socket.on('send',
         (message) => {
+            // Sending Socket ID as Name and Message To Client Side //
             socket.broadcast.emit('receive', {name: users[socket.id] , message: message});
         });
-    // -- //
+        
+    // Socket Users Disconnect Event //
+    socket.on('disconnect' , (name) => {
+        socket.broadcast.emit('leave' , users[socket.id]);
+        delete users[socket.id]; // Deleting Users Socket Id If he/She Leaves //
+    });
 });
 
 // listining on Port 8080 //

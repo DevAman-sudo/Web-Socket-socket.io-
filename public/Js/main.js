@@ -40,8 +40,14 @@ socket.on('user-joined' , (Name) => {
     appendData(`${Name} Joined.`);
 });
 
+// Socket Event To Receive Send Data To All Clients //
 socket.on('receive' , (data) => {
     appendData(`${data.name}: ${data.message}`);
+});
+
+// Socket Fires Disconnect Event If Users Leaves //
+socket.on('leave' , (name) => {
+    appendData(`${name} Left The Room. `);
 });
 
 // Sending Data To Server //
