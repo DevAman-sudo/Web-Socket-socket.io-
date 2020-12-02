@@ -7,6 +7,9 @@ const dataContainer = document.getElementById('data-container');
 // Socket Connection (client) //
 const socket = io();
 
+// Audio Variable //
+const audio = new Audio('../MP3/ding.mp3');
+
 // Prompt That Takes User Name //
 const Name = prompt(`Enter Your Name:: `);
 
@@ -27,6 +30,7 @@ form.addEventListener('submit' , (e) => {
     appendData(`You:: ${message}`);
     socket.emit('send' , message); // send message to Server //
     textArea.value = "" ;
+    audio.play();
 });
 
 // Socket Event For User Name //
